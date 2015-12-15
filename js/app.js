@@ -1,3 +1,4 @@
+"use strict";
 // Enemies our player must avoid
 var Enemy = function(speed,x,y) {
   this.sprite = 'images/enemy-bug.png';
@@ -195,7 +196,7 @@ function startNewEnemy() {
   var yIndex = Math.floor(Math.random() * 3);
   var enemySpeed = Math.floor(Math.random() * (enemySpeedMax-enemySpeedMin)) + enemySpeedMin;
   allEnemies.push(new Enemy(enemySpeed,enemyStartX,enemyStartY[yIndex]));
-};
+}
 
 function renderScoreBoard() {
   if (!pauseGame) {
@@ -231,14 +232,14 @@ function renderScoreBoard() {
     ctx.fillText("High Score",320,25);
     ctx.fillText(("     "+highScore).slice(-5),455,25);
   }
-};
+}
 
 function reduceLives() {
   lives--;
-  if (lives == 0) {
+  if (lives === 0) {
     gameOver();
   }
-};
+}
 
 function gameOver() {
   pauseGame = true;
@@ -248,7 +249,7 @@ function gameOver() {
   setTimeout(function() {
     resetGame();
   }, 3000);
-};
+}
 
 function newLevel() {
   pauseGame = true;
@@ -258,7 +259,7 @@ function newLevel() {
   setTimeout(function() {
     addLevel();
   }, 3000);
-};
+}
 
 function resetGame() {
   pauseGame = false;
@@ -279,7 +280,7 @@ function resetGame() {
   createEnemies();
   allGems = [];
   createGems();
-};
+}
 
 function addGemToCollection(gem) {
   switch(gem.type) {
@@ -296,11 +297,11 @@ function addGemToCollection(gem) {
       score = score + (3*level);
       break;
   }
-};
+}
 
 function isLevelComplete() {
   return ((orangeCount > 0) && (greenCount > 0) && (blueCount > 0));
-};
+}
 
 function addLevel() {
   pauseGame = false;
@@ -315,18 +316,18 @@ function addLevel() {
   greenCount = 0;
   blueCount = 0;
   player.reset();
-};
+}
 
 function createEnemies() {
-  for (i=0; i<numEnemies; i++) {
+  for (var i=0; i<numEnemies; i++) {
     var yIndex = Math.floor(Math.random() * 3);
     var enemySpeed = Math.floor(Math.random() * (enemySpeedMax-enemySpeedMin)) + enemySpeedMin;
     allEnemies.push(new Enemy(enemySpeed,enemyStartX,enemyStartY[yIndex]));
   }
-};
+}
 
 function createGems() {
-  for (i=0; i<numGems; i++) {
+  for (var i=0; i<numGems; i++) {
     var gemtype = createGem();
   }
 }
