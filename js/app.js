@@ -65,9 +65,10 @@ Player.prototype.update = function() {
       }
     });
     if (isLevelComplete()) {
-      addLevel();
+      newLevel();
     }
-    ctx.font = "10pt Arial";
+    renderScoreBoard();
+/*    ctx.font = "10pt Arial";
     ctx.clearRect(0,0,500,60);
     ctx.fillText("Level",20,10);
     ctx.fillText(("   "+level).slice(-3),75,10);
@@ -86,6 +87,7 @@ Player.prototype.update = function() {
     ctx.fillText(("   "+score).slice(-3),275,25);
     ctx.fillText("High Score",320,25);
     ctx.fillText(("   "+highScore).slice(-3),465,25);
+    */
   }
 };
 
@@ -221,20 +223,54 @@ function startNewEnemy() {
   allEnemies.push(new Enemy(enemySpeed,enemyStartX,enemyStartY[yIndex]));
 };
 
-function reduceLives() {
-  lives--;
-  if (lives == 0) {
-    gameover();
+function renderScoreBoard() {
+  if (!pauseGame) {
+    ctx.font = "10pt Arial";
+    ctx.clearRect(0,0,500,60);
+    ctx.fillText("Level",20,10);
+    ctx.fillText(("   "+level).slice(-3),75,10);
+    ctx.fillText("Lives",20,25);
+    ctx.fillText(("   "+lives).slice(-3),75,25);
+    ctx.fillText("Squares",20,40);
+    ctx.fillText(("   "+points).slice(-3),75,40);
+    ctx.fillText("Orange",100,10);
+    ctx.fillText(("   "+orangeCount).slice(-3),155,10);
+    ctx.fillText("Green",100,25);
+    ctx.fillText(("   "+greenCount).slice(-3),155,25);
+    ctx.fillText("Blue",100,40);
+    ctx.fillText(("   "+blueCount).slice(-3),155,40);
+    ctx.font = "16pt Arial";
+    ctx.fillText("Score",200,25);
+    ctx.fillText(("   "+score).slice(-3),275,25);
+    ctx.fillText("High Score",320,25);
+    ctx.fillText(("   "+highScore).slice(-3),465,25);
   }
 };
 
-function gameover() {
+function reduceLives() {
+  lives--;
+  if (lives == 0) {
+    gameOver();
+  }
+};
+
+function gameOver() {
   pauseGame = true;
-  ctx.font = "30pt Arial";
+  ctx.font = "20pt Arial";
   ctx.clearRect(0,0,500,60);
-  ctx.fillText("GAME OVER!!!",100,40);
+  ctx.fillText("GAME OVER!!!  Score = "+score,90,40);
   setTimeout(function() {
-    resetGame()
+    resetGame();
+  }, 3000);
+};
+
+function newLevel() {
+  pauseGame = true;
+  ctx.font = "20pt Arial";
+  ctx.clearRect(0,0,500,60);
+  ctx.fillText("WELCOME TO LEVEL "+(level+1),100,40);
+  setTimeout(function() {
+    addLevel();
   }, 3000);
 };
 
@@ -281,6 +317,7 @@ function isLevelComplete() {
 };
 
 function addLevel() {
+  pauseGame = false;
   level++;
   enemySpeedMax = 100+(40*level);
   enemySpeedMin = 50+(20*level);
@@ -291,6 +328,7 @@ function addLevel() {
   orangeCount = 0;
   greenCount = 0;
   blueCount = 0;
+  player.reset();
 };
 
 function createEnemies() {
