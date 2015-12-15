@@ -68,26 +68,6 @@ Player.prototype.update = function() {
       newLevel();
     }
     renderScoreBoard();
-/*    ctx.font = "10pt Arial";
-    ctx.clearRect(0,0,500,60);
-    ctx.fillText("Level",20,10);
-    ctx.fillText(("   "+level).slice(-3),75,10);
-    ctx.fillText("Lives",20,25);
-    ctx.fillText(("   "+lives).slice(-3),75,25);
-    ctx.fillText("Squares",20,40);
-    ctx.fillText(("   "+points).slice(-3),75,40);
-    ctx.fillText("Orange",100,10);
-    ctx.fillText(("   "+orangeCount).slice(-3),155,10);
-    ctx.fillText("Green",100,25);
-    ctx.fillText(("   "+greenCount).slice(-3),155,25);
-    ctx.fillText("Blue",100,40);
-    ctx.fillText(("   "+blueCount).slice(-3),155,40);
-    ctx.font = "16pt Arial";
-    ctx.fillText("Score",200,25);
-    ctx.fillText(("   "+score).slice(-3),275,25);
-    ctx.fillText("High Score",320,25);
-    ctx.fillText(("   "+highScore).slice(-3),465,25);
-    */
   }
 };
 
@@ -197,9 +177,8 @@ function createGem() {
     emptyTile = true;
     xIndex = Math.floor(Math.random() * 5);
     yIndex = Math.floor(Math.random() * 3);
-    console.log("xIndex: ".concat(xIndex));
     allGems.forEach(function(gem) {
-      if ((xIndex == gem.x) && (yIndex == gem.y)) {
+      if ((GemX[xIndex] == gem.x) && (GemY[yIndex] == gem.y)) {
         emptyTile = false;
       }
     });
