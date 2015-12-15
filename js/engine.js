@@ -26,7 +26,7 @@ var Engine = (function(global) {
         lastTime;
 
     canvas.width = 505;
-    canvas.height = 606;
+    canvas.height = 706;
     doc.body.appendChild(canvas);
 
     /* This function serves as the kickoff point for the game loop itself
@@ -178,7 +178,9 @@ var Engine = (function(global) {
         'images/grass-block.png',
         'images/enemy-bug.png',
         'images/char-boy.png',
-        'images/gem-orange-small.png'
+        'images/gem-orange-small.png',
+        'images/gem-green-small.png',
+        'images/gem-blue-small.png'
     ]);
     Resources.onReady(init);
 
