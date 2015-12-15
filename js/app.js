@@ -31,9 +31,6 @@ Enemy.prototype.update = function(dt) {
       var doneEnemy = allEnemies.indexOf(this);
       allEnemies.splice(doneEnemy,1);
       startNewEnemy();
-//      var yIndex = Math.floor(Math.random() * 3);
-//      var enemySpeed = Math.floor(Math.random() * (enemySpeedMax-enemySpeedMin)) + enemySpeedMin;
-//      allEnemies.push(new Enemy(enemySpeed,enemyStartX,enemyStartY[yIndex]));
     }
   }
 };
@@ -114,8 +111,6 @@ Player.prototype.handleInput = function(key) {
         this.x = this.x + playerMoveX;
       }
     }
-    console.log('points = '.concat(points));
-    console.log('Player Y: '.concat(this.y));
   }
 };
 
@@ -160,7 +155,7 @@ var GemY = [62,144,226];
 var GemX = [1,101,201,301,401,501];
 var enemySpeedMax = 100;
 var enemySpeedMin = 50;
-// Gem odds of appearing (out of 10)
+// Gem odds of appearing (orange = 50%, green = 30%, blue = 20%)
 var orangeGem = 5;
 var greenGem = 8;
 var blueGem = 10;
@@ -207,22 +202,34 @@ function renderScoreBoard() {
     ctx.font = "10pt Arial";
     ctx.clearRect(0,0,500,60);
     ctx.fillText("Level",20,10);
-    ctx.fillText(("   "+level).slice(-3),75,10);
+    ctx.textAlign="right";
+    ctx.fillText(level,90,10);
+    ctx.textAlign="start";
     ctx.fillText("Lives",20,25);
-    ctx.fillText(("   "+lives).slice(-3),75,25);
-    ctx.fillText("Squares",20,40);
-    ctx.fillText(("   "+points).slice(-3),75,40);
+    ctx.textAlign="right";
+    ctx.fillText(lives,90,25);
+    ctx.textAlign="start";
+    ctx.fillText("Tiles",20,40);
+    ctx.textAlign="right";
+    ctx.fillText(points,90,40);
+    ctx.textAlign="start";
     ctx.fillText("Orange",100,10);
-    ctx.fillText(("   "+orangeCount).slice(-3),155,10);
+    ctx.textAlign="right";
+    ctx.fillText(orangeCount,175,10);
+    ctx.textAlign="start";
     ctx.fillText("Green",100,25);
-    ctx.fillText(("   "+greenCount).slice(-3),155,25);
+    ctx.textAlign="right";
+    ctx.fillText(greenCount,175,25);
+    ctx.textAlign="start";
     ctx.fillText("Blue",100,40);
-    ctx.fillText(("   "+blueCount).slice(-3),155,40);
+    ctx.textAlign="right";
+    ctx.fillText(blueCount,175,40);
+    ctx.textAlign="start";
     ctx.font = "16pt Arial";
-    ctx.fillText("Score",200,25);
-    ctx.fillText(("   "+score).slice(-3),275,25);
+    ctx.fillText("Score",190,25);
+    ctx.fillText(("     "+score).slice(-5),265,25);
     ctx.fillText("High Score",320,25);
-    ctx.fillText(("   "+highScore).slice(-3),465,25);
+    ctx.fillText(("     "+highScore).slice(-5),455,25);
   }
 };
 
